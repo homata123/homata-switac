@@ -1,0 +1,51 @@
+{
+  "name": "kiro-account-switcher",
+  "displayName": "Kiro Account Switcher",
+  "description": "Switch between multiple Kiro accounts easily from the status bar",
+  "version": "0.1.0",
+  "publisher": "your-publisher-name",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "kiro-switcher.switch",
+        "title": "Kiro: Switch Account"
+      },
+      {
+        "command": "kiro-switcher.addProfile",
+        "title": "Kiro: Save Current Account as Profile"
+      },
+      {
+        "command": "kiro-switcher.deleteProfile",
+        "title": "Kiro: Delete Profile"
+      },
+      {
+        "command": "kiro-switcher.listProfiles",
+        "title": "Kiro: List Saved Profiles"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "kiro-switcher.switch",
+        "key": "ctrl+shift+alt+k",
+        "mac": "cmd+shift+alt+k"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package",
+    "lint": "eslint src"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0"
+  }
+}
