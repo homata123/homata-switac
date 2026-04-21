@@ -16,10 +16,12 @@
   "bugs": {
     "url": "https://github.com/homata123/homata-switac/issues"
   },
+  "license": "MIT",
   "engines": {
     "vscode": "^1.85.0"
   },
   "categories": ["Other"],
+  "keywords": ["kiro", "account", "switcher", "profile", "auth"],
   "activationEvents": ["onStartupFinished"],
   "main": "./out/extension.js",
   "contributes": {
@@ -37,8 +39,8 @@
         "title": "Switax: Delete Profile"
       },
       {
-        "command": "kiro-switcher.listProfiles",
-        "title": "Switax: List Saved Profiles"
+        "command": "kiro-switcher.openDashboard",
+        "title": "Switax: Open Profile Dashboard"
       }
     ],
     "keybindings": [
@@ -46,13 +48,18 @@
         "command": "kiro-switcher.switch",
         "key": "ctrl+shift+alt+k",
         "mac": "cmd+shift+alt+k"
+      },
+      {
+        "command": "kiro-switcher.openDashboard",
+        "key": "ctrl+shift+alt+d",
+        "mac": "cmd+shift+alt+d"
       }
     ]
   },
   "scripts": {
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "package": "vsce package",
+    "package": "npx vsce package",
     "lint": "eslint src"
   },
   "devDependencies": {

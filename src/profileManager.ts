@@ -105,3 +105,15 @@ export function deleteProfile(name: string): void {
   }
   fs.rmSync(profilePath, { recursive: true, force: true });
 }
+
+export function renameProfile(oldName: string, newName: string): void {
+  const oldPath = path.join(PROFILES_DIR, oldName);
+  const newPath = path.join(PROFILES_DIR, newName);
+  if (!fs.existsSync(oldPath)) {
+    throw new Error(`Profile "${oldName}" not found.`);
+  }
+  if (fs.existsSync(newPath)) {
+    throw new Error(`A profile named "${newName}" already exists.`);
+  }
+  fs.renameSync(oldPath, newPath);
+}

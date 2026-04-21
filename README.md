@@ -1,37 +1,109 @@
-# Kiro Account Switcher (Switax)
+# Switax — Kiro Account Switcher
 
 Switch between multiple Kiro accounts without going through the browser login flow every time.
+
+Built by [Homata](https://github.com/homata123) · [Report an issue](https://github.com/homata123/homata-switac/issues)
+
+---
 
 ## Features
 
 - Save your current logged-in Kiro account as a named profile
-- Switch between profiles from the status bar or command palette
+- Full UI dashboard tab — view, switch, rename, and delete profiles
 - Active account always visible in the status bar
-- Delete profiles you no longer need
+- Quick switch via command palette or keyboard shortcut
+
+---
 
 ## Usage
 
 1. Log in to Kiro with your first account normally
-2. Open command palette → **Kiro: Save Current Account as Profile** (e.g. `work`)
-3. Log in to Kiro with a second account
+2. Open command palette (`Ctrl+Shift+P`) → **Switax: Save Current Account as Profile** (e.g. `work`)
+3. Sign out of Kiro, log in with a second account
 4. Save it as another profile (e.g. `personal`)
-5. From now on, use **Switax: Switch Account** (or click the status bar) to swap between them
+5. Use **Switax: Open Profile Dashboard** or click the status bar to manage and switch accounts
 
-## Keyboard Shortcut
+---
 
-`Ctrl+Shift+Alt+K` (Windows/Linux) / `Cmd+Shift+Alt+K` (Mac) — opens the account switcher
+## Profile Dashboard
+
+Open with `Ctrl+Shift+Alt+D` or via the status bar click. The dashboard shows:
+
+- All saved profiles with last-saved timestamp
+- Which profile is currently active
+- Actions: Switch, Rename, Delete per profile
+- Button to save the current account as a new profile
+
+---
+
+## Keyboard Shortcuts
+
+| Shortcut | Action |
+|---|---|
+| `Ctrl+Shift+Alt+K` | Quick switch account (quick pick) |
+| `Ctrl+Shift+Alt+D` | Open Profile Dashboard tab |
+
+---
 
 ## Commands
 
 | Command | Description |
 |---|---|
-| `Switax: Switch Account` | Pick a saved profile to switch to |
+| `Switax: Switch Account` | Quick pick switcher |
 | `Switax: Save Current Account as Profile` | Snapshot current auth as a named profile |
 | `Switax: Delete Profile` | Remove a saved profile |
-| `Switax: List Saved Profiles` | Show all saved profiles |
+| `Switax: Open Profile Dashboard` | Open the full UI dashboard tab |
+
+---
 
 ## How it works
 
 Profiles are stored in `~/.kiro-profiles/`. Each profile is a snapshot of Kiro's local auth token files. Switching restores those files and prompts a window reload so Kiro picks up the new credentials.
 
-> Note: After switching, Kiro may ask you to re-authenticate if the token has expired.
+> After switching, Kiro may ask you to re-authenticate if the token has expired.
+
+---
+
+## Installation
+
+### Option A — Install from VSIX (recommended)
+
+```bash
+# 1. Clone the repo
+git clone https://github.com/homata123/homata-switac.git
+cd homata-switac
+
+# 2. Install dependencies and build
+npm install
+npm run compile
+
+# 3. Package into a .vsix file
+npx vsce package
+
+# 4. Install in Kiro
+# Open Kiro → Ctrl+Shift+P → "Extensions: Install from VSIX"
+# Select the generated .vsix file
+```
+
+### Option B — Run locally without packaging (development mode)
+
+```bash
+git clone https://github.com/homata123/homata-switac.git
+cd homata-switac
+
+npm install
+npm run compile
+```
+
+Then open the folder in Kiro and press `F5` — this launches an Extension Development Host with Switax loaded and ready to use.
+
+---
+
+## Storage location
+
+Profiles are saved to:
+
+- Windows: `C:\Users\<you>\.kiro-profiles\`
+- macOS/Linux: `~/.kiro-profiles/`
+
+Each subfolder is a named profile containing snapshots of Kiro's auth token files.
