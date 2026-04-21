@@ -4,6 +4,18 @@
   "description": "Switch between multiple Kiro accounts easily from the status bar",
   "version": "0.1.0",
   "publisher": "your-publisher-name",
+  "author": {
+    "name": "Homata (Frank Ho)",
+    "url": "https://github.com/homata123"
+  },
+  "homepage": "https://github.com/homata123/homata-switac",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/homata123/homata-switac"
+  },
+  "bugs": {
+    "url": "https://github.com/homata123/homata-switac/issues"
+  },
   "engines": {
     "vscode": "^1.85.0"
   },
