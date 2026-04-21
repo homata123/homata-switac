@@ -17,6 +17,7 @@ export const KIRO_AUTH_PATHS: Record<string, string[]> = {
   linux: [
     path.join(os.homedir(), '.kiro'),
     path.join(os.homedir(), '.config', 'kiro'),
+    path.join(os.homedir(), '.local', 'share', 'kiro'),
     path.join(os.homedir(), '.aws', 'sso', 'cache'),
   ],
 };
