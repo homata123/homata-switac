@@ -72,36 +72,35 @@ Profiles are stored in `~/.kiro-profiles/`. Each profile is a snapshot of Kiro's
 
 ## Installation
 
-### Option A — Install from VSIX (recommended)
+### Option A — Download VSIX from Releases (easiest, no build needed)
+
+1. Go to the [Releases page](https://github.com/homata123/homata-switac/releases)
+2. Download the latest `.vsix` file
+3. In Kiro: `Ctrl+Shift+P` → **"Extensions: Install from VSIX"** → select the downloaded file
+4. Reload Kiro when prompted
+
+### Option B — Build from source
 
 ```bash
-# 1. Clone the repo
 git clone https://github.com/homata123/homata-switac.git
 cd homata-switac
-
-# 2. Install dependencies and build
 npm install
 npm run compile
-
-# 3. Package into a .vsix file
 npx vsce package
-
-# 4. Install in Kiro
-# Open Kiro → Ctrl+Shift+P → "Extensions: Install from VSIX"
-# Select the generated .vsix file
 ```
 
-### Option B — Run locally without packaging (development mode)
+Then install the generated `.vsix` via `Ctrl+Shift+P` → "Extensions: Install from VSIX".
+
+### Option C — Development mode (no install)
 
 ```bash
 git clone https://github.com/homata123/homata-switac.git
 cd homata-switac
-
 npm install
 npm run compile
 ```
 
-Then open the folder in Kiro and press `F5` — this launches an Extension Development Host with Switax loaded and ready to use.
+Open the folder in Kiro and press `F5` — launches an Extension Development Host with Switax ready to use.
 
 ---
 
