@@ -3,7 +3,7 @@
   "displayName": "Kiro Account Switcher",
   "description": "Switch between multiple Kiro accounts easily from the status bar",
   "version": "0.1.0",
-  "publisher": "your-publisher-name",
+  "publisher": "Homata (Frank Ho)",
   "author": {
     "name": "Homata (Frank Ho)",
     "url": "https://github.com/homata123"
@@ -26,19 +26,19 @@
     "commands": [
       {
         "command": "kiro-switcher.switch",
-        "title": "Kiro: Switch Account"
+        "title": "Switax: Switch Account"
       },
       {
         "command": "kiro-switcher.addProfile",
-        "title": "Kiro: Save Current Account as Profile"
+        "title": "Switax: Save Current Account as Profile"
       },
       {
         "command": "kiro-switcher.deleteProfile",
-        "title": "Kiro: Delete Profile"
+        "title": "Switax: Delete Profile"
       },
       {
         "command": "kiro-switcher.listProfiles",
-        "title": "Kiro: List Saved Profiles"
+        "title": "Switax: List Saved Profiles"
       }
     ],
     "keybindings": [

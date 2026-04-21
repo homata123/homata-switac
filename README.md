@@ -1,4 +1,4 @@
-# Kiro Account Switcher
+# Kiro Account Switcher (Switax)
 
 Switch between multiple Kiro accounts without going through the browser login flow every time.
 
@@ -15,7 +15,7 @@ Switch between multiple Kiro accounts without going through the browser login fl
 2. Open command palette → **Kiro: Save Current Account as Profile** (e.g. `work`)
 3. Log in to Kiro with a second account
 4. Save it as another profile (e.g. `personal`)
-5. From now on, use **Kiro: Switch Account** (or click the status bar) to swap between them
+5. From now on, use **Switax: Switch Account** (or click the status bar) to swap between them
 
 ## Keyboard Shortcut
 
@@ -25,10 +25,10 @@ Switch between multiple Kiro accounts without going through the browser login fl
 
 | Command | Description |
 |---|---|
-| `Kiro: Switch Account` | Pick a saved profile to switch to |
-| `Kiro: Save Current Account as Profile` | Snapshot current auth as a named profile |
-| `Kiro: Delete Profile` | Remove a saved profile |
-| `Kiro: List Saved Profiles` | Show all saved profiles |
+| `Switax: Switch Account` | Pick a saved profile to switch to |
+| `Switax: Save Current Account as Profile` | Snapshot current auth as a named profile |
+| `Switax: Delete Profile` | Remove a saved profile |
+| `Switax: List Saved Profiles` | Show all saved profiles |
 
 ## How it works
 
