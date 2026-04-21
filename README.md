@@ -4,6 +4,8 @@ Switch between multiple Kiro accounts without going through the browser login fl
 
 Built by [Homata](https://github.com/homata123) · [Report an issue](https://github.com/homata123/homata-switac/issues)
 
+![Switax overview](Screenshot_1.png)
+
 ---
 
 ## Features
@@ -23,6 +25,8 @@ Built by [Homata](https://github.com/homata123) · [Report an issue](https://git
 4. Save it as another profile (e.g. `personal`)
 5. Use **Switax: Open Profile Dashboard** or click the status bar to manage and switch accounts
 
+![Quick switch picker](Screenshot_2.png)
+
 ---
 
 ## Profile Dashboard
@@ -33,6 +37,8 @@ Open with `Ctrl+Shift+Alt+D` or via the status bar click. The dashboard shows:
 - Which profile is currently active
 - Actions: Switch, Rename, Delete per profile
 - Button to save the current account as a new profile
+
+![Profile Dashboard](Screenshot_3.png)
 
 ---
 
