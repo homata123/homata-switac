@@ -71,7 +71,7 @@ Open with `Ctrl+Shift+Alt+D` or via the status bar click. Each account card show
 
 ## How it works
 
-Profiles are stored in `~/.kiro-profiles/`. Each profile is a snapshot of Kiro's local auth token files plus a `meta.json` with email, provider, and usage info. Switching restores those files and prompts a window reload so Kiro picks up the new credentials.
+Profiles are stored in `~/.kiro-profiles/`. Each profile is a snapshot of Kiro's local with email, provider, and usage info. Switching restores those files and prompts a window reload so Kiro picks up the new credentials.
 
 > After switching, Kiro may ask you to re-authenticate if the token has expired.
 
@@ -118,7 +118,7 @@ Profiles are saved to:
 - Windows: `C:\Users\<you>\.kiro-profiles\`
 - macOS/Linux: `~/.kiro-profiles/`
 
-Each subfolder is a named profile containing snapshots of Kiro's auth token files and a `meta.json` file.
+Each subfolder is a named profile containing snapshots of Kiro profile.
 
 ---
 
@@ -127,14 +127,14 @@ Each subfolder is a named profile containing snapshots of Kiro's auth token file
 See [VERSIONS.md](VERSIONS.md) for the full version history.
 
 ### v0.2.1 — Sign-in info & credits fix
-- Provider and auth method now auto-detected from `kiro-auth-token.json` at save time — no more "Unknown"
-- Plan, credits, bonus credits, and reset date preserved from existing `meta.json` on re-save
+- Provider and auth method now auto-detected from local storage — no more "Unknown"
+- Plan, credits, bonus credits, and reset date preserved from existing local on re-save
 
 ### v0.2.0 — Account Info Dashboard
 - Redesigned dashboard with per-account cards showing email, provider, credits, and usage
 - "Log in with another account in browser" button — opens Kiro login page without manual sign-out
 - Duplicate account detection by email when saving a new profile
-- `meta.json` stored per profile (email, provider, plan, credits, reset date)
+- Local stored per profile (email, provider, plan, credits, reset date)
 - Provider picker (Google, GitHub, AWS Builder ID, etc.) on profile save
 
 ### v0.1.0 — Initial Release

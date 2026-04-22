@@ -7,8 +7,8 @@ Older `.vsix` builds are archived in the [`archived/`](archived/) folder and can
 ---
 
 ### v0.2.1 — Sign-in info & credits fix
-- Provider (Google, GitHub, etc.) and auth method now read directly from the snapshotted `kiro-auth-token.json` at save time — no longer shows "Unknown"
-- Plan, credits used/total, bonus credits, expiry, and reset date are preserved from existing `meta.json` when re-saving a profile
+- Provider (Google, GitHub, etc.) and auth method now read directly from the snapshotted at save time — no longer shows "Unknown"
+- Plan, credits used/total, bonus credits, expiry, and reset date are preserved from local when re-saving a profile
 - Removed manual provider picker prompt — provider is auto-detected from the token file
 
 ![Profile Dashboard — sign-in info & credits](Screenshot_4.png)
@@ -31,8 +31,8 @@ A "Log in with another account in browser" button at the bottom of the dashboard
 **Duplicate account detection**
 When saving a new profile, the extension now asks for the account email upfront. If that email is already stored in an existing profile, it warns the user and offers to update the existing profile's snapshot instead of creating a duplicate.
 
-**Profile metadata (`meta.json`)**
-Each profile folder now contains a `meta.json` file storing:
+**Profile metadata**
+Each profile folder now contains a local file storing:
 - `email` — account email address
 - `provider` — sign-in method (Google, GitHub, AWS Builder ID, etc.)
 - `savedAt` — ISO timestamp of when the profile was last saved
