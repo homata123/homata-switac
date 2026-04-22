@@ -11,7 +11,9 @@ Built by [Homata](https://github.com/homata123) · [Report an issue](https://git
 ## Features
 
 - Save your current logged-in Kiro account as a named profile
-- Full UI dashboard tab — view, switch, rename, and delete profiles
+- Full UI dashboard tab — account cards with email, provider, credits, and usage info
+- "Log in with another account" button opens Kiro login in browser — no manual sign-out needed
+- Duplicate account detection by email when saving a new profile
 - Active account always visible in the status bar
 - Quick switch via command palette or keyboard shortcut
 
@@ -20,10 +22,11 @@ Built by [Homata](https://github.com/homata123) · [Report an issue](https://git
 ## Usage
 
 1. Log in to Kiro with your first account normally
-2. Open command palette (`Ctrl+Shift+P`) → **Switax: Save Current Account as Profile** (e.g. `work`)
-3. Sign out of Kiro, log in with a second account
-4. Save it as another profile (e.g. `personal`)
-5. Use **Switax: Open Profile Dashboard** or click the status bar to manage and switch accounts
+2. Open command palette (`Ctrl+Shift+P`) → **Switax: Save Current Account as Profile**
+3. Enter the account email and select the sign-in provider
+4. Click **"Log in with another account in browser"** in the dashboard to sign in with a second account in your browser
+5. Come back to Kiro, save it as another profile
+6. Use **Switax: Open Profile Dashboard** or click the status bar to manage and switch accounts
 
 ![Quick switch picker](Screenshot_2.png)
 
@@ -31,14 +34,18 @@ Built by [Homata](https://github.com/homata123) · [Report an issue](https://git
 
 ## Profile Dashboard
 
-Open with `Ctrl+Shift+Alt+D` or via the status bar click. The dashboard shows:
+Open with `Ctrl+Shift+Alt+D` or via the status bar click. Each account card shows:
 
-- All saved profiles with last-saved timestamp
-- Which profile is currently active
-- Actions: Switch, Rename, Delete per profile
-- Button to save the current account as a new profile
+- Avatar initial, email address, and sign-in provider
+- Bonus credits table (expiry + estimated usage)
+- Estimated usage with plan badge and credits progress bar
+- Upgrade Plan and Contact Billing Support links
+- Switch, Rename, Delete actions per profile
+- "Log in with another account in browser" button at the bottom
 
 ![Profile Dashboard](Screenshot_3.png)
+
+![Profile Dashboard — sign-in info & credits](Screenshot_4.png)
 
 ---
 
@@ -64,7 +71,7 @@ Open with `Ctrl+Shift+Alt+D` or via the status bar click. The dashboard shows:
 
 ## How it works
 
-Profiles are stored in `~/.kiro-profiles/`. Each profile is a snapshot of Kiro's local auth token files. Switching restores those files and prompts a window reload so Kiro picks up the new credentials.
+Profiles are stored in `~/.kiro-profiles/`. Each profile is a snapshot of Kiro's local auth token files plus a `meta.json` with email, provider, and usage info. Switching restores those files and prompts a window reload so Kiro picks up the new credentials.
 
 > After switching, Kiro may ask you to re-authenticate if the token has expired.
 
@@ -111,4 +118,29 @@ Profiles are saved to:
 - Windows: `C:\Users\<you>\.kiro-profiles\`
 - macOS/Linux: `~/.kiro-profiles/`
 
-Each subfolder is a named profile containing snapshots of Kiro's auth token files.
+Each subfolder is a named profile containing snapshots of Kiro's auth token files and a `meta.json` file.
+
+---
+
+## Changelog
+
+See [VERSIONS.md](VERSIONS.md) for the full version history.
+
+### v0.2.1 — Sign-in info & credits fix
+- Provider and auth method now auto-detected from `kiro-auth-token.json` at save time — no more "Unknown"
+- Plan, credits, bonus credits, and reset date preserved from existing `meta.json` on re-save
+
+### v0.2.0 — Account Info Dashboard
+- Redesigned dashboard with per-account cards showing email, provider, credits, and usage
+- "Log in with another account in browser" button — opens Kiro login page without manual sign-out
+- Duplicate account detection by email when saving a new profile
+- `meta.json` stored per profile (email, provider, plan, credits, reset date)
+- Provider picker (Google, GitHub, AWS Builder ID, etc.) on profile save
+
+### v0.1.0 — Initial Release
+- Save/switch/rename/delete Kiro account profiles
+- Status bar indicator for active profile
+- Basic dashboard with profile list
+- Safe file copy that skips locked Electron cache directories
+
+> Older `.vsix` builds are kept in the [`archived/`](archived/) folder for reference and rollback.

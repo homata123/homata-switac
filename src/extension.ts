@@ -5,6 +5,10 @@ import {
   loadProfile,
   deleteProfile,
   getExistingAuthPaths,
+  saveProfileMeta,
+  findProfileByEmail,
+  readSnapshotTokenMeta,
+  readSnapshotMeta,
 } from './profileManager';
 import { ProfileDashboard } from './dashboard';
 
@@ -61,19 +65,88 @@ async function cmdAddProfile(ctx: vscode.ExtensionContext) {
     return;
   }
 
+  // Collect email for duplicate detection
+  const email = await vscode.window.showInputBox({
+    prompt: 'Enter the email address of the currently logged-in Kiro account',
+    placeHolder: 'e.g. you@example.com',
+    validateInput: v => {
+      if (!v || !v.trim()) return 'Email cannot be empty';
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())) return 'Enter a valid email address';
+      return null;
+    },
+  });
+  if (!email) return;
+
+  // Duplicate check
+  const existing = findProfileByEmail(email.trim());
+  if (existing) {
+    const action = await vscode.window.showWarningMessage(
+      `An account with email "${email.trim()}" is already saved as profile "${existing}".`,
+      'Update Existing', 'Cancel'
+    );
+    if (action !== 'Update Existing') return;
+    // Overwrite the existing profile's snapshot
+    try {
+      saveProfile(existing);
+      const tokenMeta = readSnapshotTokenMeta(existing);
+      const prevMeta = readSnapshotMeta(existing);
+      saveProfileMeta(existing, {
+        email: email.trim(),
+        provider: tokenMeta?.provider ?? prevMeta?.provider ?? 'Unknown',
+        authMethod: tokenMeta?.authMethod ?? prevMeta?.authMethod,
+        expiresAt: tokenMeta?.expiresAt ?? prevMeta?.expiresAt,
+        savedAt: new Date().toISOString(),
+        plan: prevMeta?.plan,
+        creditsUsed: prevMeta?.creditsUsed,
+        creditsTotal: prevMeta?.creditsTotal,
+        bonusCredits: prevMeta?.bonusCredits,
+        bonusExpiry: prevMeta?.bonusExpiry,
+        resetDate: prevMeta?.resetDate,
+      });
+      ctx.globalState.update('activeProfile', existing);
+      updateStatusBar(ctx);
+      vscode.window.showInformationMessage(`Profile "${existing}" updated.`);
+      ProfileDashboard.currentPanel?.refresh();
+    } catch (e: any) {
+      vscode.window.showErrorMessage(e.message);
+    }
+    return;
+  }
+
   const name = await vscode.window.showInputBox({
     prompt: 'Profile name',
     placeHolder: 'e.g. work, personal, client-a',
-    validateInput: v => (v && v.trim() ? null : 'Name cannot be empty'),
+    value: email.trim().split('@')[0],
+    validateInput: v => {
+      if (!v || !v.trim()) return 'Name cannot be empty';
+      if (listProfiles().includes(v.trim())) return `Profile "${v.trim()}" already exists`;
+      return null;
+    },
   });
   if (!name) return;
 
   try {
     saveProfile(name.trim());
-    ctx.globalState.update(STATE_KEY, name.trim());
+    // Pull provider/authMethod/expiresAt from the token snapshot
+    const tokenMeta = readSnapshotTokenMeta(name.trim());
+    // Pull plan/credits from any previously saved meta (re-save scenario)
+    const prevMeta = readSnapshotMeta(name.trim());
+    saveProfileMeta(name.trim(), {
+      email: email.trim(),
+      provider: tokenMeta?.provider ?? prevMeta?.provider ?? 'Unknown',
+      authMethod: tokenMeta?.authMethod ?? prevMeta?.authMethod,
+      expiresAt: tokenMeta?.expiresAt ?? prevMeta?.expiresAt,
+      savedAt: new Date().toISOString(),
+      plan: prevMeta?.plan,
+      creditsUsed: prevMeta?.creditsUsed,
+      creditsTotal: prevMeta?.creditsTotal,
+      bonusCredits: prevMeta?.bonusCredits,
+      bonusExpiry: prevMeta?.bonusExpiry,
+      resetDate: prevMeta?.resetDate,
+    });
+    ctx.globalState.update('activeProfile', name.trim());
     updateStatusBar(ctx);
     vscode.window.showInformationMessage(`Profile "${name.trim()}" saved.`);
-    // Refresh dashboard if open
     ProfileDashboard.currentPanel?.refresh();
   } catch (e: any) {
     vscode.window.showErrorMessage(e.message);
