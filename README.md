@@ -98,6 +98,8 @@ npx vsce package
 
 Then install the generated `.vsix` via `Ctrl+Shift+P` → "Extensions: Install from VSIX".
 
+> **Note:** Source code is no longer available in this repository as of 04/06/2026. Please use Option A instead.
+
 ### Option C — Development mode (no install)
 
 ```bash
@@ -109,6 +111,8 @@ npm run compile
 
 Open the folder in Kiro and press `F5` — launches an Extension Development Host with Switax ready to use.
 
+> **Note:** Source code is no longer available in this repository as of 04/06/2026. Please use Option A instead.
+
 ---
 
 ## Storage location
@@ -119,6 +123,10 @@ Profiles are saved to:
 - macOS/Linux: `~/.kiro-profiles/`
 
 Each subfolder is a named profile containing snapshots of Kiro profile.
+
+---
+
+> **Note (04/06/2026):** From this date, the source code is no longer available in this repository. Only the `.vsix` file is provided for direct install and use. The "Build from source" and "Development mode" options below are kept for historical reference only.
 
 ---
 
